@@ -27,7 +27,8 @@ namespace QuanLyChamCong.Models
 
         public DbSet<SupplementalLeave> supplementalLeaves { get; set;}
 
-        public DbSet<Type> types { get; set; }  
+        public DbSet<Type> types { get; set; }
+        public DbSet<Group> groups { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

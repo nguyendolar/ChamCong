@@ -80,9 +80,11 @@ C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCo
 C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csproj.CopyComplete
 C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.dll
 C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.pdb
-C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.createDatabase.resources
+C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csproj.AssemblyReference.cache
+C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.updatemodel2.resources
 C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csproj.GenerateResource.cache
-C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations._new.resources
+C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.up.resources
+C:\Users\thanh\source\repos\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.up1.resources
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\bin\QuanLyChamCong.dll.config
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\bin\QuanLyChamCong.dll
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\bin\QuanLyChamCong.pdb
@@ -162,10 +164,13 @@ D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\bin\Newtonsoft.Json.xml
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\bin\Antlr3.Runtime.pdb
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csprojAssemblyReference.cache
-D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.createDatabase.resources
-D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations._new.resources
+D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.updatemodel2.resources
+D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.up.resources
+D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.up1.resources
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csproj.GenerateResource.cache
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csproj.CoreCompileInputs.cache
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.csproj.CopyComplete
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.dll
 D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.pdb
+D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.updatedb.resources
+D:\.NET MVC\QuanLyChamCong\QuanLyChamCong\obj\Debug\QuanLyChamCong.Migrations.updatesalary.resources

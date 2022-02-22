@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        @{ DateTime aDateTime = DateTime.Now; }
+        <h1 class="mt-4">Quản lý chấm công</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr style="background-color: #F7F8F9; color: #0056A7 ">
+                            <th width="200px">Ngày</th>
+                            <th width="200px">Nhân viên</th>
+                            <th width="70px">CheckIn</th>
+                            <th width="70px">CheckOut </th>
+                            <th width="100px">Thời gian muộn </th>
+                            <th width="100px">Lý do </th>
+                            <th width="150px">Báo cáo cuối ngày</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th width="200px">Ngày</th>
+                            <th width="200px">Nhân viên</th>
+                            <th width="70px">CheckIn</th>
+                            <th width="70px">CheckOut </th>
+                            <th width="100px">Thời gian muộn </th>
+                            <th width="100px">Lý do </th>
+                            <th width="150px">Báo cáo cuối ngày</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            string dateS = String.Format("{0:yyyy-MM-dd}", item.date);
+                            <tr>
+                                <td>@dateS</td>
+                                <td>
+                                    @item.User.fullName
+                                </td>
+                                
+                                <td>@item.checkIn.ToString(@"hh\:mm")</td>
+                                @if (@item.checkOut.ToString(@"hh\:mm\:ss") == "00:00:00")
+                                {
+                                    <td>--/--</td>
+                                }
+                                else
+                                {
+                                    <td>@item.checkOut.ToString(@"hh\:mm")</td>
+                                }
+                                <td>@item.timeLate</td>
+                                <td>@item.reason</td>
+                                <td>@item.report</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+

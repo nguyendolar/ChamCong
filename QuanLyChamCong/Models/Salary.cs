@@ -15,11 +15,12 @@ namespace QuanLyChamCong.Models
         public int idSalary { get; set; }
 
         public float salary { get; set; }
+        public int month { get; set; }
 
         public int status { get; set; }
 
         public int idUser { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual User User { get; set; }
     }
 }

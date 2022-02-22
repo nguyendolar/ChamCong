@@ -56,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,22 +129,46 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\CheckInController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\SalaryController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Daos\CheckInDao.cs" />
+    <Compile Include="Daos\SalaryDao.cs" />
+    <Compile Include="Daos\GroupDao.cs" />
+    <Compile Include="Daos\ReviewDao.cs" />
+    <Compile Include="Daos\UserDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202201221553579_createDatabase.cs" />
-    <Compile Include="Migrations\202201221553579_createDatabase.designer.cs">
-      <DependentUpon>202201221553579_createDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202201310854139_updatemodel2.cs" />
+    <Compile Include="Migrations\202201310854139_updatemodel2.designer.cs">
+      <DependentUpon>202201310854139_updatemodel2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202201221605153_new.cs" />
-    <Compile Include="Migrations\202201221605153_new.designer.cs">
-      <DependentUpon>202201221605153_new.cs</DependentUpon>
+    <Compile Include="Migrations\202201311018559_up.cs" />
+    <Compile Include="Migrations\202201311018559_up.designer.cs">
+      <DependentUpon>202201311018559_up.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202201311020566_up1.cs" />
+    <Compile Include="Migrations\202201311020566_up1.designer.cs">
+      <DependentUpon>202201311020566_up1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202210256385_updatedb.cs" />
+    <Compile Include="Migrations\202202210256385_updatedb.designer.cs">
+      <DependentUpon>202202210256385_updatedb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202210401568_updatesalary.cs" />
+    <Compile Include="Migrations\202202210401568_updatesalary.designer.cs">
+      <DependentUpon>202202210401568_updatesalary.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\RecaptchaResult.cs" />
     <Compile Include="Models\CheckIn.cs" />
     <Compile Include="Models\DbContextQl.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Salary.cs" />
@@ -207,9 +232,19 @@
     <Content Include="Views\Modules\Footer.cshtml" />
     <Content Include="Views\Modules\Menu.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Salary\Index.cshtml" />
+    <Content Include="Views\User\Infor.cshtml" />
+    <Content Include="Views\Salary\Employee.cshtml" />
+    <Content Include="Views\CheckIn\Index.cshtml" />
+    <Content Include="Views\CheckIn\Supplemental.cshtml" />
+    <Content Include="Views\CheckIn\CheckInUser.cshtml" />
+    <Content Include="Views\CheckIn\SupplementalUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Review\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -225,11 +260,20 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202201221553579_createDatabase.resx">
-      <DependentUpon>202201221553579_createDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201310854139_updatemodel2.resx">
+      <DependentUpon>202201310854139_updatemodel2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201221605153_new.resx">
-      <DependentUpon>202201221605153_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201311018559_up.resx">
+      <DependentUpon>202201311018559_up.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201311020566_up1.resx">
+      <DependentUpon>202201311020566_up1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202210256385_updatedb.resx">
+      <DependentUpon>202202210256385_updatedb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202210401568_updatesalary.resx">
+      <DependentUpon>202202210401568_updatesalary.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

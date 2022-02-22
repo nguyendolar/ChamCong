@@ -7,13 +7,13 @@ namespace QuanLyChamCong.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class createDatabase : IMigrationMetadata
+    public sealed partial class updatemodel2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(createDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatemodel2));
         
         string IMigrationMetadata.Id
         {
-            get { return "202201221553579_createDatabase"; }
+            get { return "202201310854139_updatemodel2"; }
         }
         
         string IMigrationMetadata.Source

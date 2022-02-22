@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewBag.Title = "SupplementalUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        @{ DateTime aDateTime = DateTime.Now; }
+        <h1 class="mt-4">Quản lý đơn phép</h1>
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.Msg != null)
+                {
+                    if (ViewBag.Msg == "1")
+                    {
+                        <div class="alert alert-success">
+                            <strong>Thành công</strong>
+                        </div>
+                    }
+                }
+                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalAdd">
+                    Thêm mới
+                </button>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr style="background-color: #F7F8F9; color: #0056A7 ">
+                            <th width="200px">Loại đơn</th>
+                            <th width="200px">Ngày</th>
+                            <th width="70px">Bắt đầu</th>
+                            <th width="70px">Kết thúc </th>
+                            <th width="100px">Lý do </th>
+                            <th width="150px">Trạng thái</th>
+                            <th width="150px">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th width="200px">Loại đơn</th>
+                            <th width="200px">Ngày</th>
+                            <th width="70px">CheckIn</th>
+                            <th width="70px">CheckOut </th>
+                            <th width="100px">Lý do </th>
+                            <th width="150px">Trạng thái</th>
+                            <th width="150px">Hành động</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var idEx1 = "exampleModalLabel" + item.idSupplementalLeave;
+                            string dateS = String.Format("{0:yyyy-MM-dd}", item.date);
+                            <tr>
+                                <td>@item.Type.name</td>
+                                <td>@dateS</td>
+                                <td>@item.checkIn.ToString(@"hh\:mm")</td>
+                                @if (@item.checkOut.ToString(@"hh\:mm\:ss") == "00:00:00")
+                                {
+                                    <td>--/--</td>
+                                }
+                                else
+                                {
+                                    <td>@item.checkOut.ToString(@"hh\:mm")</td>
+                                }
+                                <td>@item.reason</td>
+                                <td>
+                                    @if (item.status == 0)
+                                    {
+                                        <span>Đang đợi duyệt</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Đã phê duyệt</span>
+                                    }
+                            </td>
+                            <td>
+                                @if (item.status == 0)
+                                {
+                                    <button style="width:100px" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#@idEx1">
+                                        Sửa
+                                    </button>
+                                    <div class="modal fade" id="@idEx1" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhập</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" action="/CheckIn/UpdateSupp" class="register-form" id="register-form">
+                                                        <input type="hidden" class="form-control" id="id" name="idSupplementalLeave" value="@item.idSupplementalLeave">
+                                                        <input type="hidden" class="form-control" id="id" name="idUser" value="@item.idUser">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <div class="mb-3">
+                                                                    <label for="category-film"
+                                                                           class="col-form-label">Loại đơn:</label>
+                                                                    <select class="form-select" name="idType" required aria-label="Default select example">
+                                                                        <option value="@item.idType" selected>@item.Type.name</option>
+                                                                        @foreach (var item2 in ViewBag.Types)
+                                                                        {
+                                                                            <option value="@item2.idType">@item2.name</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="category-film"
+                                                                           class="col-form-label">Ngày:</label>
+                                                                    <input type="date" class="form-control" id="category-film" value="@String.Format("{0:yyyy-MM-dd}", item.date)" name="date">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="mb-3">
+                                                                    <label for="category-film"
+                                                                           class="col-form-label">Bắt đầu:</label>
+                                                                    <input type="time" class="form-control" id="category-film" value="@item.checkIn.ToString(@"hh\:mm")" name="checkIn">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="category-film"
+                                                                           class="col-form-label">Kết thúc :</label>
+                                                                    <input type="time" class="form-control" id="category-film" value="@item.checkOut.ToString(@"hh\:mm")" name="checkOut">
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="category-film"
+                                                                       class="col-form-label">Lý do:</label>
+                                                                <input type="text" class="form-control" id="category-film" value="@item.reason" name="reason">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary">Save </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                }
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="exampleModalAdd" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/CheckIn/AddSupp" class="register-form" id="register-form">
+                    <input type="hidden" class="form-control" id="id" name="idUser" value="@ViewBag.IdUser">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="category-film"
+                                       class="col-form-label">Loại đơn:</label>
+                                <select class="form-select" name="idType" required aria-label="Default select example">
+                                    <option selected>Chọn loại đơn </option>
+                                    @foreach (var item2 in ViewBag.Types)
+                                    {
+                                        <option value="@item2.idType">@item2.name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="category-film"
+                                       class="col-form-label">Ngày:</label>
+                                <input type="date" class="form-control" id="category-film" required name="date">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="category-film"
+                                       class="col-form-label">Bắt đầu:</label>
+                                <input type="time" class="form-control" id="category-film" required name="checkIn">
+                            </div>
+                            <div class="mb-3">
+                                <label for="category-film"
+                                       class="col-form-label">Kết thúc :</label>
+                                <input type="time" class="form-control" id="category-film" required name="checkOut">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category-film"
+                                   class="col-form-label">Lý do:</label>
+                            <input type="text" class="form-control" id="category-film" required name="reason">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+

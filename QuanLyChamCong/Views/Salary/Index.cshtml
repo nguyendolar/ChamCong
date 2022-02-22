@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid px-4">
+        <h4 class="mt-1">Danh sách lương nhân viên</h4>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                @if (ViewBag.Msg != null)
+                {
+                    if (ViewBag.Msg == "1")
+                    {
+                        <div class="alert alert-success">
+                            <strong>Thành công</strong>
+                        </div>
+                    }
+                    else if (ViewBag.Msg == "2")
+                    {
+                        <div class="alert alert-danger">
+                            <strong></strong>
+                        </div>
+                    }
+
+                }
+                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#exampleModalAdd">
+                    Thêm mới
+                </button>
+            </div>
+
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead style="color:#0d6efd ">
+                        <tr>
+                            <th>STT</th>
+                            <th>Nhân viên</th>
+                            <th>Tiền lương</th>
+                            <th>Tháng</th>
+                            <th>Trạng thái</th>
+                            <th>Hoạt động</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Nhân viên</th>
+                            <th>Tiền lương</th>
+                            <th>Tháng</th>
+                            <th>Trạng thái</th>
+                            <th>Hoạt động</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @{ var stt = 1;}
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td style="width:10px">@stt</td>
+                            <td>
+                                @item.User.fullName
+                            </td>
+                            <td>
+                                @String.Format("{0:0,00}", item.salary) VND
+                            </td>
+                            <td>
+                                @item.month
+                            </td>
+                            <td>
+                                @if (item.status == 0)
+                                {
+                                    <span>Chưa nhận</span>
+                                }
+                                else
+                                {
+                                    <span>Đã nhận</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.status == 0)
+                                {
+                                    var idEx1 = "exampleModalLabel" + item.idSalary;
+                                    var idModelDel = "exampleModalDel" + item.idSalary;
+                                    <button style="width:100px" type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#@idEx1">
+                                        Sửa
+                                    </button>
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#@idModelDel" style="width:140px" class="btn btn-warning"> Đã thanh toán</button>
+                                    <div class="modal fade" id="@idModelDel" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận đã thanh toán ?</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body">
+                                                    Nhân viên : @item.User.fullName
+                                                    <form action="/Salary/ChangeStatus" method="post">
+                                                        <input type="hidden" class="form-control" id="id" name="idSalary" value="@item.idSalary">
+                                                        <div class="modal-footer" style="margin-top: 20px">
+                                                            <button style="width:100px" type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">
+                                                                Đóng
+                                                            </button>
+                                                            <button style="width:100px" type="submit" class="btn btn-danger"> Lưu</button>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Update-->
+                                    <div class="modal fade" id="@idEx1" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhập</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="POST" action="/Salary/Update" class="register-form" id="register-form">
+                                                        <input type="hidden" class="form-control" id="id" name="idSalary" value="@item.idSalary">
+                                                        <div class="mb-3">
+                                                            <label for="category-film"
+                                                                   class="col-form-label">Nhân viên:</label>
+                                                            <select class="form-select" name="idUser" required aria-label="Default select example">
+                                                                <option value="@item.idUser" selected>@item.User.fullName - @item.User.Group.name</option>
+                                                                @foreach (var item2 in ViewBag.Users)
+                                                                {
+                                                                    <option value="@item2.idUser">@item2.fullName - @item2.Group.name</option>
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="category-film"
+                                                                   class="col-form-label">Lương:</label>
+                                                            <input type="number" class="form-control" id="category-film" value="@item.salary" name="salary">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="category-film"
+                                                                   class="col-form-label">Tháng:</label>
+                                                            <select class="form-select" name="month" required aria-label="Default select example">
+                                                                <option value="@item.month" selected>Tháng @item.month </option>
+                                                                <option value="1">Tháng 1</option>
+                                                                <option value="2">Tháng 2</option>
+                                                                <option value="3">Tháng 3</option>
+                                                                <option value="4">Tháng 4</option>
+                                                                <option value="5">Tháng 5</option>
+                                                                <option value="6">Tháng 6</option>
+                                                                <option value="7">Tháng 7</option>
+                                                                <option value="8">Tháng 8</option>
+                                                                <option value="9">Tháng 9</option>
+                                                                <option value="10">Tháng 10</option>
+                                                                <option value="11">Tháng 11</option>
+                                                                <option value="12">Tháng 12</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">
+                                                                Đóng
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary">Lưu</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+
+                                }
+                            </td>
+                        </tr>
+                            stt++;
+                            
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="modal fade" id="exampleModalAdd" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/Salary/Add" class="register-form" id="register-form">
+                    <div class="mb-3">
+                        <label for="category-film"
+                               class="col-form-label">Nhân viên:</label>
+                        <select class="form-select" name="idUser" required aria-label="Default select example">
+                            <option selected>Chọn nhân viên </option>
+                            @foreach (var item2 in ViewBag.Users)
+                            {
+                                <option value="@item2.idUser">@item2.fullName - @item2.Group.name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category-film"
+                               class="col-form-label">Lương:</label>
+                        <input type="number" class="form-control" id="category-film" required name="salary">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category-film"
+                               class="col-form-label">Tháng:</label>
+                        <select class="form-select" name="month" required aria-label="Default select example">
+                            <option selected>Chọn tháng </option>
+                            <option value="1">Tháng 1</option>
+                            <option value="2">Tháng 2</option>
+                            <option value="3">Tháng 3</option>
+                            <option value="4">Tháng 4</option>
+                            <option value="5">Tháng 5</option>
+                            <option value="6">Tháng 6</option>
+                            <option value="7">Tháng 7</option>
+                            <option value="8">Tháng 8</option>
+                            <option value="9">Tháng 9</option>
+                            <option value="10">Tháng 10</option>
+                            <option value="11">Tháng 11</option>
+                            <option value="12">Tháng 12</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+

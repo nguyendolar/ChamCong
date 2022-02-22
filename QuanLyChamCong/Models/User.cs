@@ -31,9 +31,13 @@ namespace QuanLyChamCong.Models
         [StringLength(255)]
         public string address { get; set; }
 
+        public string gender { get; set; }
+
         public int status { get; set; }
 
         public int idRole { get; set; }
+
+        public int idGroup { get; set; }
 
         public virtual Role Role { get; set; }
 
@@ -43,6 +47,8 @@ namespace QuanLyChamCong.Models
 
         public virtual ICollection<SupplementalLeave> SupplementalLeaves { get; set; }
 
-        public virtual Salary Salary { get; set; }
+        public virtual ICollection<Salary> Salaries { get; set; }
+
+        public virtual Group Group { get; set; }
     }
 }

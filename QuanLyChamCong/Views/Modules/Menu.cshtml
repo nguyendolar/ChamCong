@@ -1,9 +1,57 @@
 ﻿
 <div id="layoutSidenav_nav">
-
+    @{ var userInfomatiom = (QuanLyChamCong.Models.User)Session["USER"]; }
     <nav style="background-color: #F1F1F1 !important" class="sb-sidenav accordion " id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
+                @if (userInfomatiom.Role.idRole == 2)
+                {
+                    <a class="nav-link " href="/User/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý nhân viên
+
+                    </a>
+                    <a class="nav-link " href="/Group/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý phòng ban
+
+                    </a>
+                    <a class="nav-link " href="/Salary/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý lương
+
+                    </a>
+                    <a class="nav-link " href="/CheckIn/Index">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý chấm công
+
+                    </a>
+                    <a class="nav-link " href="/CheckIn/Supplemental">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Quản lý đơn phép
+
+                    </a>
+                }
+                else
+                {
+                    <a class="nav-link " href="/CheckIn/CheckInUser/@userInfomatiom.idUser">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Chấm công
+
+                    </a>
+                    <a class="nav-link " href="/CheckIn/SupplementalUser/@userInfomatiom.idUser">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Đơn phép
+
+                    </a>
+                    <a class="nav-link " href="/Salary/Employee/@userInfomatiom.idUser">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Bảng Lương
+
+                    </a>
+                }
+            </div>
+                @*  <div class="nav">
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                    aria-controls="collapseLayouts">
@@ -62,9 +110,9 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                     Báo cáo
                 </a>
+            </div>*@
             </div>
-        </div>
 
-    </nav>
+</nav>
 </div>
 

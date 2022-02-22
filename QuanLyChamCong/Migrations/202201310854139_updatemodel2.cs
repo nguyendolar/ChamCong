@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class createDatabase : DbMigration
+    public partial class updatemodel2 : DbMigration
     {
         public override void Up()
         {
@@ -19,11 +19,11 @@
                         reason = c.String(nullable: false, maxLength: 255),
                         status = c.Int(nullable: false),
                         report = c.String(nullable: false, maxLength: 255),
-                        User_idUser = c.Int(),
+                        idUser = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.idCheckIn)
-                .ForeignKey("dbo.Users", t => t.User_idUser)
-                .Index(t => t.User_idUser);
+                .ForeignKey("dbo.Users", t => t.idUser)
+                .Index(t => t.idUser);
             
             CreateTable(
                 "dbo.Users",
@@ -35,15 +35,13 @@
                         password = c.String(nullable: false, maxLength: 255),
                         phoneNumber = c.String(maxLength: 255),
                         address = c.String(maxLength: 255),
+                        gender = c.String(),
                         status = c.Int(nullable: false),
-                        Role_idRole = c.Int(),
-                        Salary_idSalary = c.Int(),
+                        idRole = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.idUser)
-                .ForeignKey("dbo.Roles", t => t.Role_idRole)
-                .ForeignKey("dbo.Salaries", t => t.Salary_idSalary)
-                .Index(t => t.Role_idRole)
-                .Index(t => t.Salary_idSalary);
+                .ForeignKey("dbo.Roles", t => t.idRole)
+                .Index(t => t.idRole);
             
             CreateTable(
                 "dbo.Reviews",
@@ -52,11 +50,11 @@
                         idReview = c.Int(nullable: false, identity: true),
                         content = c.String(nullable: false),
                         status = c.Int(nullable: false),
-                        User_idUser = c.Int(),
+                        idUser = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.idReview)
-                .ForeignKey("dbo.Users", t => t.User_idUser)
-                .Index(t => t.User_idUser);
+                .ForeignKey("dbo.Users", t => t.idUser)
+                .Index(t => t.idUser);
             
             CreateTable(
                 "dbo.Roles",
@@ -74,8 +72,11 @@
                         idSalary = c.Int(nullable: false, identity: true),
                         salary = c.Single(nullable: false),
                         status = c.Int(nullable: false),
+                        idUser = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.idSalary);
+                .PrimaryKey(t => t.idSalary)
+                .ForeignKey("dbo.Users", t => t.idUser)
+                .Index(t => t.idUser);
             
             CreateTable(
                 "dbo.SupplementalLeaves",
@@ -88,14 +89,14 @@
                         date = c.DateTime(nullable: false),
                         reason = c.String(nullable: false, maxLength: 255),
                         status = c.Int(nullable: false),
-                        Type_idType = c.Int(),
-                        User_idUser = c.Int(),
+                        idType = c.Int(nullable: false),
+                        idUser = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.idSupplementalLeave)
-                .ForeignKey("dbo.Types", t => t.Type_idType)
-                .ForeignKey("dbo.Users", t => t.User_idUser)
-                .Index(t => t.Type_idType)
-                .Index(t => t.User_idUser);
+                .ForeignKey("dbo.Types", t => t.idType)
+                .ForeignKey("dbo.Users", t => t.idUser)
+                .Index(t => t.idType)
+                .Index(t => t.idUser);
             
             CreateTable(
                 "dbo.Types",
@@ -110,18 +111,18 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.SupplementalLeaves", "User_idUser", "dbo.Users");
-            DropForeignKey("dbo.SupplementalLeaves", "Type_idType", "dbo.Types");
-            DropForeignKey("dbo.Users", "Salary_idSalary", "dbo.Salaries");
-            DropForeignKey("dbo.Users", "Role_idRole", "dbo.Roles");
-            DropForeignKey("dbo.Reviews", "User_idUser", "dbo.Users");
-            DropForeignKey("dbo.CheckIns", "User_idUser", "dbo.Users");
-            DropIndex("dbo.SupplementalLeaves", new[] { "User_idUser" });
-            DropIndex("dbo.SupplementalLeaves", new[] { "Type_idType" });
-            DropIndex("dbo.Reviews", new[] { "User_idUser" });
-            DropIndex("dbo.Users", new[] { "Salary_idSalary" });
-            DropIndex("dbo.Users", new[] { "Role_idRole" });
-            DropIndex("dbo.CheckIns", new[] { "User_idUser" });
+            DropForeignKey("dbo.SupplementalLeaves", "idUser", "dbo.Users");
+            DropForeignKey("dbo.SupplementalLeaves", "idType", "dbo.Types");
+            DropForeignKey("dbo.Salaries", "idUser", "dbo.Users");
+            DropForeignKey("dbo.Users", "idRole", "dbo.Roles");
+            DropForeignKey("dbo.Reviews", "idUser", "dbo.Users");
+            DropForeignKey("dbo.CheckIns", "idUser", "dbo.Users");
+            DropIndex("dbo.SupplementalLeaves", new[] { "idUser" });
+            DropIndex("dbo.SupplementalLeaves", new[] { "idType" });
+            DropIndex("dbo.Salaries", new[] { "idUser" });
+            DropIndex("dbo.Reviews", new[] { "idUser" });
+            DropIndex("dbo.Users", new[] { "idRole" });
+            DropIndex("dbo.CheckIns", new[] { "idUser" });
             DropTable("dbo.Types");
             DropTable("dbo.SupplementalLeaves");
             DropTable("dbo.Salaries");

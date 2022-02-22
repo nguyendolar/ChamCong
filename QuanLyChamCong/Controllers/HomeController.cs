@@ -10,7 +10,15 @@ namespace QuanLyChamCong.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var user = Session["USER"];
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult About()
